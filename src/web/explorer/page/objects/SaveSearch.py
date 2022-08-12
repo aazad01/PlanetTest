@@ -16,3 +16,29 @@ class SaveSearch:
 
     def __init__(self, driver):
         self._driver = driver
+
+    def header(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.HEADER)
+
+    def close(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.CLOSE_LOCATOR)
+
+    def name(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.NAME_LOCATOR)
+
+    def date_range(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.DATE_RANGE_LOCATOR)
+
+    def no_end_date(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.NO_END_DATE_LOCATOR)
+
+    def save(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.SAVE_LOCATOR)
+
+    def items(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.ITEMS_LOCATOR)
+
+    def delete(self):
+        return CustomWebElement.find_by_xpath(self._driver, SaveSearch.DELETE_LOACTOR)
+
+

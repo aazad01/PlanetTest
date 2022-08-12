@@ -119,10 +119,10 @@ class CustomWebElement:
                                  max_retry_count=max_retry_count, ecs=ecs)
 
     def find_all(self):
-        custom_web_elements = []
-        for ele in self._driver.find_elements(self._locator_strategy, self._locator):
-            custom_web_elements.append(self.find_by_web_element(ele))
-        return custom_web_elements
+        return list(map(
+            lambda ele: self.find_by_web_element(self._driver, ele),
+            self._driver.find_elements(self._locator_strategy, self._locator)
+        ))
 
     def wait_for_text(self, text, use_value_attr=False, max_wait_time=max_wait_time, should_exist=True, required=True):
         try:
@@ -243,3 +243,6 @@ class CustomWebElement:
 
     def is_enabled(self, use_attribute=False):
         return str(self.get_attribute("enabled").lower()) == "true" if use_attribute else self.find().is_enabled()
+
+    def is_displayed(self):
+        return self.find().is_displayed()

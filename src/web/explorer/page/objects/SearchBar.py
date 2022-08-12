@@ -8,6 +8,8 @@ class SearchBar:
     ORDERS_LOCATOR = ".//button[@value='orders-drawer']"
     TASKS_LOCATOR = ".//button[@value='taskingDashboard']"
 
+    SEARCH_SIDEBAR_LOCATOR = ".//div[@data-tour='search-sidebar']"
+
     SEARCH_TEXTBOX_LOCATOR = ".//input[@data-qe='search-input']"
     DAILY_INTERVAL_LOCATOR = ".//button[@data-qe='daily-interval']"
     WEEKLY_INTERVAL_LOCATOR = ".//button[@data-qe='weekly-interval']"
@@ -42,6 +44,9 @@ class SearchBar:
 
     def search(self):
         return CustomWebElement.find_by_xpath(self._driver, SearchBar.SEARCH_LOCATOR)
+
+    def search_sidebar(self):
+        return CustomWebElement.find_by_xpath(self._driver, SearchBar.SEARCH_SIDEBAR_LOCATOR)
 
     def search_box(self):
         return CustomWebElement.find_by_xpath(self._driver, SearchBar.SEARCH_TEXTBOX_LOCATOR)
