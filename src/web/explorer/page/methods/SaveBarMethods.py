@@ -6,17 +6,30 @@ from src.web.explorer.page.objects.SaveSearch import SaveSearch
 from src.web.explorer.page.objects.SearchBar import SearchBar
 
 
-class SaveBarMethods(SearchBar, SaveSearch):
+class SaveBarMethods(SaveSearch):
 
     def __init__(self, driver):
         super().__init__(driver)
-        super(SearchBar, self).__init__(driver)
         if driver.current_url not in Environment.URL.EXPLORER:
             driver.get(Environment.URL.EXPLORER)
 
     def click_on_search(self, search):
-        if not self.search_sidebar().is_displayed():
-            self.search().click()
-        search_box = self.search_box()
-        if search_box.get_attribute('value'):
-            search_box.clear()
+        if not self.saved_sidebar().is_displayed():
+            self.saved_searches().click()
+        filter = self.filter_search()
+        if filter.get_attribute('value'):
+            filter.clear()
+        filter.send_input(search)
+
+    def check_items(self):
+        if len(self.items().find_all()) > 0:
+            return list(map(lambda elm: elm.get_text(), self.items_title().find_all()))
+
+    def validate_items_date(self):
+        raise NotImplemented("Not complete")
+
+    def validate_items_type(self):
+        raise NotImplemented("Not complete")
+
+    def delete_all(self):
+        raise NotImplemented("Not complete")

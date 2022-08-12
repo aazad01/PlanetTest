@@ -15,7 +15,7 @@ class SearchBarMethods(SearchBar, FilterResults, SaveSearch):
         if driver.current_url not in Environment.URL.EXPLORER:
             driver.get(Environment.URL.EXPLORER)
 
-    def click_on_search(self, search, verify_saved=False, enter=False):
+    def click_on_search(self, search, verify_saved=None, enter=False):
         if not self.search_sidebar().is_displayed():
             self.search().click()
         search_box = self.search_box()
@@ -27,11 +27,12 @@ class SearchBarMethods(SearchBar, FilterResults, SaveSearch):
         if enter:
             search_box.send_input(search + Keys.ENTER)
 
-    def verify_suggestions(self, search, saved=False):
+    def verify_suggestions(self, search, saved=None):
         suggestions = self.search_suggestions().find_all()
 
         if saved:
-            assert "Saved Search" in suggestions[0].get_text()
+            for found_saved_filters in saved:
+                assert "Saved Search" in suggestions[0].get_text()
 
         def validation(elem, search):
             print(elem.get_text())
