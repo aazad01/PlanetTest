@@ -11,7 +11,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class CustomWebElement:
-
     max_retry_count = 3
     max_wait_time = 30
     poll_frequency = 1.0
@@ -103,7 +102,8 @@ class CustomWebElement:
                     raise
         return ele
 
-    def find(self, max_wait_time=max_wait_time, max_retry_count=max_retry_count, poll_frequency=poll_frequency, ignored_exceptions=None, ecs=None, until=True) -> WebElement:
+    def find(self, max_wait_time=max_wait_time, max_retry_count=max_retry_count, poll_frequency=poll_frequency,
+             ignored_exceptions=None, ecs=None, until=True) -> WebElement:
         # If obj was created with an existing WebElement then we will not have locator - so simply return the element
         # passed in
         if self._web_element is not None:
@@ -132,7 +132,7 @@ class CustomWebElement:
                     self.get_identifier(),
                     "value" if use_value_attr else "innerText",
                     text)],
-                  until=should_exist)
+                              until=should_exist)
             return True
         except BaseException:
             if required:
@@ -140,7 +140,8 @@ class CustomWebElement:
             else:
                 return False
 
-    def wait_for_attribute_value(self, expected_attr_value, max_wait_time=max_wait_time, should_exist=True, required=True):
+    def wait_for_attribute_value(self, expected_attr_value, max_wait_time=max_wait_time, should_exist=True,
+                                 required=True):
         try:
             self.wait_to_appear(max_wait_time=max_wait_time)
             self.process_wait(self.get_driver_wait(max_wait_time=max_wait_time), self.max_retry_count, [
@@ -148,7 +149,7 @@ class CustomWebElement:
                     self.get_identifier(),
                     expected_attr_value[0],
                     expected_attr_value[1])],
-                    until=should_exist)
+                              until=should_exist)
             return True
         except BaseException:
             if required:
@@ -169,11 +170,13 @@ class CustomWebElement:
     def wait_to_disappear(self, max_wait_time=max_wait_time, poll_frequency=poll_frequency, required=True):
         self.wait_to_appear(max_wait_time=max_wait_time, required=required, poll_frequency=poll_frequency, until=False)
 
-    def wait_to_appear_and_disappear(self, max_wait_time_to_appear=5, max_wait_time_to_disappear=max_wait_time, required=False):
+    def wait_to_appear_and_disappear(self, max_wait_time_to_appear=5, max_wait_time_to_disappear=max_wait_time,
+                                     required=False):
         self.wait_to_appear(max_wait_time=max_wait_time_to_appear, poll_frequency=0.5, required=False)
         self.wait_to_disappear(max_wait_time=max_wait_time_to_disappear)
 
-    def click(self, use_js=False, expected_element=None, expected_attr_value=None, max_wait_time=None, should_exist=True, required=True):
+    def click(self, use_js=False, expected_element=None, expected_attr_value=None, max_wait_time=None,
+              should_exist=True, required=True):
         ele = self.find()
         self.get_driver_wait().until(self.expected_condition.visibility_of(ele))
         for i in range(self.max_retry_count):
@@ -195,7 +198,7 @@ class CustomWebElement:
                                           expected_attr_value[0],
                                           expected_attr_value[1])],
                                       until=should_exist)
-                    return
+                return
             except BaseException:
                 if i == self.max_retry_count - 1:
                     if required:
@@ -203,7 +206,8 @@ class CustomWebElement:
                     else:
                         pass
 
-    def click_js(self, expected_element=None, expected_attr_value=None, max_wait_time=None, should_exist=True, required=True):
+    def click_js(self, expected_element=None, expected_attr_value=None, max_wait_time=None, should_exist=True,
+                 required=True):
         self.click(use_js=True, expected_element=expected_element, expected_attr_value=expected_attr_value,
                    max_wait_time=max_wait_time, should_exist=should_exist, required=required)
 
@@ -239,16 +243,3 @@ class CustomWebElement:
 
     def is_enabled(self, use_attribute=False):
         return str(self.get_attribute("enabled").lower()) == "true" if use_attribute else self.find().is_enabled()
-
-
-
-
-
-
-
-
-
-
-
-
-

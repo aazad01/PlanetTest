@@ -17,7 +17,7 @@ class Welcome:
         return CustomWebElement.find_by_xpath(self._driver, Welcome.PARAGRAPH_LOCATOR)
 
     def skip(self):
-        return CustomWebElement.find_by_xpath(self._driver, Welcome.PARAGRAPH_LOCATOR)
+        return CustomWebElement.find_by_xpath(self._driver, Welcome.SKIP_LOCATOR)
 
     def start_tour(self):
-        return CustomWebElement.find_by_xpath(self._driver, Welcome.PARAGRAPH_LOCATOR)
+        return CustomWebElement.find_by_xpath(self._driver, Welcome.START_TOUR_LOCATOR)

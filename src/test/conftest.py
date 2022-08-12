@@ -30,7 +30,7 @@ def setup(setting):
         driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
     else:
         driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
-    driver.implicitly_wait(2)  # Seconds
+    driver.implicitly_wait(5)  # Seconds
     # driver.maximize_window()
     yield driver
     driver.quit()
