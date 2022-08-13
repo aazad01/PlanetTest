@@ -16,10 +16,11 @@ class SearchBar:
     MONTHLY_INTERVAL_LOCATOR = ".//button[@data-qe='monthly-interval']"
     QUARTERLY_INTERVAL_LOCATOR = ".//button[@data-qe='quarterly-interval']"
 
+    COLLAPSE_SIDEBAR_LOCATOR = SEARCH_SIDEBAR_LOCATOR + "//button[@data-qe='collapse-sidebar']"
     # DAILY
     FILTER_LOCATOR = ".//button[@data-qe='filters-button']"
     DATES_LOCATOR = ".//button[@data-qe='set-date-range-button']"
-    SAVE_SEARCH_LOCATOR = ".//button[@data-qa='click-save-search-button']"
+    SAVE_SEARCH_LOCATOR = ".//button[@data-qe='click-save-search-button']"
 
     # MONTHLY
     MONTHLY_SERIES_LOCATOR = ".//div[@data-qe='series-selector']"
@@ -65,3 +66,9 @@ class SearchBar:
 
     def tasks(self):
         return CustomWebElement.find_by_xpath(self._driver, SearchBar.TASKS_LOCATOR)
+
+    def save_search(self):
+        return CustomWebElement.find_by_xpath(self._driver, SearchBar.SAVE_SEARCH_LOCATOR)
+
+    def collapse_sidebar(self):
+        return CustomWebElement.find_by_xpath(self._driver, SearchBar.COLLAPSE_SIDEBAR_LOCATOR)
