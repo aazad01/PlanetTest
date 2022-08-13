@@ -66,6 +66,17 @@ Pre-requisite: Login to Planet explorer (www.planet.com/explorer)
 - Click Save Search
 - Delete the save searches
 
+### TODO: Incomplete due to time
+
+#### 5. Validation on the Item Types.
+
+Possible Parameters.
+
+    - Resolution Type (3 types)
+    - PlanetScope (2 types)
+    - Instrument type (3 types)
+    - Set Dates as a parameter
+
 ## Discovered Issues
 
 #### 1. Saved Search name has a character limit
