@@ -16,6 +16,7 @@ from src.web.explorer.page.methods.WelcomeMethods import WelcomeMethods
 
 
 def pytest_generate_tests(metafunc):
+    """Test Data, can be used to auto generate also"""
     if "gen_test_data" in metafunc.fixturenames:
         # if metafunc.config.getoption("all"):
         #     metafunc.parametrize("gen_test_data", ['Random'])
@@ -38,11 +39,13 @@ def pytest_runtest_makereport(item, call):
 
 @pytest.fixture(scope="session")
 def setting():
+    """WIP: To be able to set browser type"""
     return BrowserTypes.FIREFOX
 
 
 @pytest.fixture(scope="session")
 def setup(request):
+    """Setups and starts the browser"""
     # TODO: Get this configuration wise to get multiple browser
     if request == BrowserTypes.CHROME:
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -58,6 +61,7 @@ def setup(request):
 
 @pytest.fixture(scope="module")
 def before_test(setup):
+    """Logins into planet.com and then continues until explorer is displayed"""
     signin = SignInMethods(setup)
     signin.login(Environment.USERNAME, Environment.PASSWORD)
 
