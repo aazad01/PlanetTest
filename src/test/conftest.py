@@ -1,3 +1,7 @@
+import os.path
+import random
+import string
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
@@ -17,12 +21,19 @@ from src.web.explorer.page.methods.WelcomeMethods import WelcomeMethods
 
 def pytest_generate_tests(metafunc):
     """Test Data, can be used to auto generate also"""
-    if "gen_test_data" in metafunc.fixturenames:
+    if "valid_locations" in metafunc.fixturenames:
         # if metafunc.config.getoption("all"):
-        #     metafunc.parametrize("gen_test_data", ['Random'])
+        #     metafunc.parametrize("valid_locations", ['Random'])
         # else:
-        #     metafunc.parametrize("gen_test_data", ['San Franciso, CA', 'Latham, NY'])
-        metafunc.parametrize("gen_test_data", ['San Franciso, CA', 'Latham, NY'])
+        #     metafunc.parametrize("valid_locations", ['San Franciso, CA', 'Latham, NY'])
+        metafunc.parametrize("valid_locations", ['San Francisco, CA', 'Latham, NY', 'Miami', 'England'])
+    elif "invalid_locations" in metafunc.fixturenames:
+        letters = string.ascii_lowercase
+        random_string = ''.join(random.choice(letters) for i in range(100))
+        metafunc.parametrize("invalid_locations",
+                             ['Sing A Poor',
+                              '15102 Some Place',
+                              random_string])
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -53,7 +64,12 @@ def setup(request, setting):
     elif setting == BrowserTypes.EDGE:
         driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager(cache_valid_range=7).install()))
     else:
-        driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager(cache_valid_range=7).install()))
+        path = "C:/Users/Abuhe/.wdm/drivers/geckodriver/win64/0.31/geckodriver.exe"
+        if os.path.isfile(path):
+            driver = webdriver.Firefox(executable_path=path)
+        else:
+            driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager(cache_valid_range=7).install()))
+
     driver.implicitly_wait(5)  # Seconds
     # driver.maximize_window()
     yield driver
