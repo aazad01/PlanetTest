@@ -19,6 +19,8 @@ Install libraries with pip
 
 To run tests, run the following command
 
+There are a total of 19 tests, 4 should fail
+
 To run on a single login per class, use:
 
 ```bash
