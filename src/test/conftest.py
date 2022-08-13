@@ -26,7 +26,7 @@ def pytest_generate_tests(metafunc):
         #     metafunc.parametrize("valid_locations", ['Random'])
         # else:
         #     metafunc.parametrize("valid_locations", ['San Franciso, CA', 'Latham, NY'])
-        metafunc.parametrize("valid_locations", ['San Francisco, CA', 'Latham, NY', 'Miami', 'England'])
+        metafunc.parametrize("valid_locations", ['San Francisco, CA', 'Latham, NY', 'Miami, Florida', 'England'])
     elif "invalid_locations" in metafunc.fixturenames:
         letters = string.ascii_lowercase
         random_string = ''.join(random.choice(letters) for i in range(100))
