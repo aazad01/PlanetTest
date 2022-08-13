@@ -3,3 +3,4 @@ selenium==4.3.0
 webdriver-manager==3.8.3
 pytest
 pytest-xdist
+pandas

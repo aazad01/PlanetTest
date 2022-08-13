@@ -10,7 +10,7 @@ from src.web.explorer.page.methods.WelcomeMethods import WelcomeMethods
 
 class TestSearchSuggestions:
 
-    def test_search_bar(self, before_test, valid_locations):
+    def test_search_suggestions(self, before_test, valid_locations):
         search = SearchBarMethods(before_test)
         save = SaveBarMethods(before_test)
         save.click_on_search(search=valid_locations.split(',')[0])

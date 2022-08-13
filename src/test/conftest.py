@@ -27,13 +27,13 @@ def pytest_generate_tests(metafunc):
         # else:
         #     metafunc.parametrize("valid_locations", ['San Franciso, CA', 'Latham, NY'])
         metafunc.parametrize("valid_locations",
-                             ['San Francisco, CA', 'Latham, NY', 'Miami, Florida', 'England', 'Brooklyn, USA'])
+                             ['San Francisco, CA', 'Latham, NY', 'Miami, Florida', 'Brooklyn, USA', 'England'])
     elif "invalid_locations" in metafunc.fixturenames:
         letters = string.ascii_lowercase
         random_string = ''.join(random.choice(letters) for i in range(100))
         metafunc.parametrize("invalid_locations",
-                             ['Sing A Poor',
-                              '15102 Some Place',
+                             ['S1ng a-P00r',
+                              '15L02 S0me Plac3',
                               random_string])
 
 
@@ -72,7 +72,7 @@ def setup(request, setting):
             driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager(cache_valid_range=7).install()))
 
     driver.implicitly_wait(5)  # Seconds
-    # driver.maximize_window()
+    driver.maximize_window()
     yield driver
     driver.quit()
 
