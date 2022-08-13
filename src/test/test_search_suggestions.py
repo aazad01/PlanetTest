@@ -13,10 +13,10 @@ class TestSearchSuggestions:
     def test_search_bar(self, before_test, valid_locations):
         search = SearchBarMethods(before_test)
         save = SaveBarMethods(before_test)
-        save.click_on_search(search=valid_locations[:len(valid_locations) // 2])
+        save.click_on_search(search=valid_locations.split(',')[0])
         items = save.check_items()
         search.click_on_search(valid_locations, verify_saved=items)
-        search.verify_suggestions(search=valid_locations[:5], saved=items)
+        search.verify_suggestions(search=valid_locations, saved=items)
 
     def test_search_bar_invalid(self, before_test, invalid_locations):
         search = SearchBarMethods(before_test)

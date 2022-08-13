@@ -34,7 +34,7 @@ class SearchBarMethods(SearchBar, FilterResults, SaveSearchDialog):
             self.search_suggestions().find().click()
 
     def verify_suggestions(self, search, saved=None):
-        self.search_box().send_input(search.split(',')[0])
+        self.search_box().send_input(search)
         suggestions = self.search_suggestions().find_all()
 
         if saved:
@@ -84,4 +84,3 @@ class SearchBarMethods(SearchBar, FilterResults, SaveSearchDialog):
             self.save().click()
         # FLAKY_WARNING: There is a slight timing issue here, where after the click the dialog doesn't go away quick enough
         time.sleep(1)
-

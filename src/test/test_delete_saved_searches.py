@@ -11,7 +11,7 @@ class TestDeleteSavedSearches:
         save.click_on_search()
         items_0 = save.check_items()
         if items_0:
-            save.delete_searches()
+            save.delete_searches(all=True)
             items_1 = save.check_items()
             assert len(items_0) > len(items_1)
         else:
