@@ -40,20 +40,20 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(scope="session")
 def setting():
     """WIP: To be able to set browser type"""
+    # TODO: Get this configuration wise to get multiple browser
     return BrowserTypes.FIREFOX
 
 
 @pytest.fixture(scope="class")
-def setup(request):
+def setup(request, setting):
     """Setups and starts the browser"""
-    # TODO: Get this configuration wise to get multiple browser
-    # TODO: Avoid using webdriver-manager, API rate limit exceeded
-    if request == BrowserTypes.CHROME:
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    elif request == BrowserTypes.EDGE:
-        driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+    """API rate limit exceeded https://github.com/SergeyPirogov/webdriver_manager#gh_token"""
+    if setting == BrowserTypes.CHROME:
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(cache_valid_range=7).install()))
+    elif setting == BrowserTypes.EDGE:
+        driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager(cache_valid_range=7).install()))
     else:
-        driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+        driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager(cache_valid_range=7).install()))
     driver.implicitly_wait(5)  # Seconds
     # driver.maximize_window()
     yield driver
