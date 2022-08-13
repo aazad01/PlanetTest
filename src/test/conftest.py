@@ -47,6 +47,7 @@ def setting():
 def setup(request):
     """Setups and starts the browser"""
     # TODO: Get this configuration wise to get multiple browser
+    # TODO: Avoid using webdriver-manager, API rate limit exceeded
     if request == BrowserTypes.CHROME:
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     elif request == BrowserTypes.EDGE:

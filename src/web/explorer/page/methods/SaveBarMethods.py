@@ -1,3 +1,5 @@
+import random
+
 from selenium.webdriver import Keys
 
 from src.web import Environment
@@ -34,6 +36,9 @@ class SaveBarMethods(SaveSearch):
         raise NotImplemented("Not complete")
 
     def delete_searches(self, all=False):
+        saved_searches = self.delete().find_all()
         if all:
-            for elem in self.delete().find_all():
+            for elem in saved_searches:
                 elem.click()
+        else:
+            random.choice(saved_searches).click()

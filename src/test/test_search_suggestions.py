@@ -16,4 +16,4 @@ class TestSearchSuggestions:
         save.click_on_search(search=gen_test_data[:len(gen_test_data) // 2])
         items = save.check_items()
         search.click_on_search(gen_test_data, verify_saved=items)
-        search.verify_suggestions(search[:5], items)
+        search.verify_suggestions(search=gen_test_data[:5], saved=items)
