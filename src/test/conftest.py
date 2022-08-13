@@ -43,7 +43,7 @@ def setting():
     return BrowserTypes.FIREFOX
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="class")
 def setup(request):
     """Setups and starts the browser"""
     # TODO: Get this configuration wise to get multiple browser
@@ -59,7 +59,7 @@ def setup(request):
     driver.quit()
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="class")
 def before_test(setup):
     """Logins into planet.com and then continues until explorer is displayed"""
     signin = SignInMethods(setup)
